@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Quotes</title>
+  <link rel="stylesheet" href="styles.css" />
+<link href="https://fonts.googleapis.com/css?family=Crimson+Text|Josefin+Slab|Tangerine" rel="stylesheet">
+</head>
+<body>
+<body background="presidents/parchment.jpg">
+<center>
+  <h3>What did that President say again?&nbsp</h3>
+  <hr>
+  <h2>Have you ever wanted to falsify Presidential quotes?
+    </br>
+    YOU CAME TO THE RIGHT PLACE!
+    </br>
+  <p>On this website, masterfully created by Benji Dazey, using Vue, you can now match a hilarious Ron Swanson Quote with a Commander and Chief! Just refresh the page to get a new combo!</p>
+  </h2>
+  <hr>
+  <h1>
+  <div id="app">
+    <img v-bind:src="selectedImage" />
+    </br>
+    "{{ info.data[0] }}"
+    <p>- {{names[imageIndex]}}</p>
+  </div>
+  </h1>
+  </center>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.2/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="https://unpkg.com/vue-star-rating/dist/star-rating.min.js"></script>
+  <script src="/script.js"></script>
+</body>
+
+</html>
