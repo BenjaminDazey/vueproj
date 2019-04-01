@@ -1,3 +1,4 @@
+
 new Vue({
   el: '#app',
   data: {
@@ -93,17 +94,70 @@ new Vue({
       'George Walker Bush',
       'Woodrow Wilson',
     ],
+    items: [],
     selectedImage: '',
     imageIndex: 0,
-    info: null
+    info: null,
+    quote: "",
+    newItemQuote: "Type a new Quote.",
   },
   created() {
     this.imageIndex = Math.floor(Math.random() * this.images.length);
     this.selectedImage = this.images[this.imageIndex];
+    this.getItems();
   },
   mounted() {
     axios
       .get('https://ron-swanson-quotes.herokuapp.com/v2/quotes')
       .then(response => (this.info = response))
+  },
+  methods: {
+    async upload() {
+      try {
+        this.quote = this.info.data[0];
+        let r2 = await axios.post('/api/items', {
+          quote: this.quote,
+          path: this.imageIndex
+        }).then(this.getItems());
+        this.addItem = r2.data;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async deleteItem(item) {
+      try {
+        let response = axios.delete("/api/items/" + item._id);
+        this.getItems();
+        return true;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async getItems() {
+      try {
+        let response = await axios.get("/api/items");
+        this.items = response.data;
+        return true;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    async editItem(item) {
+      try {
+        let response = await axios.put("/api/items/" + item._id, {
+          quote: this.newItemQuote,
+          path: item.path,
+        });
+        this.getItems();
+        return true;
+      } catch (error) {
+        console.log(error);
+      }
+    },
   }
 })
+
+Vue.filter('reverse', function(value) {
+  // slice to make a copy of array, then reverse the copy
+  return value.slice().reverse();
+});
