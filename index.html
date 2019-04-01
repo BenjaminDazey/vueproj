@@ -15,15 +15,30 @@
     </br>
     YOU CAME TO THE RIGHT PLACE!
     </br>
-  <p>On this website, masterfully created by Benji Dazey, using Vue, you can now match a hilarious Ron Swanson Quote with a Commander and Chief! Just refresh the page to get a new combo!</p>
+  <p>On this website, you can now match a hilarious Ron Swanson Quote with a Commander and Chief! Just refresh the page to get a new combo!</p>
+<p>If you would like to keep the quote that was generated, just click upload! It will appear in "Your saved quotes". If you want to change a saved quote by hand, fill in the text box marked "Type a new Quote" and then just click edit on any of the saved quotes to change it! You can also click delete to delete that qupte!</p>
   </h2>
   <hr>
   <h1>
   <div id="app">
+    <p>Your new random quote: </p>
     <img v-bind:src="selectedImage" />
     </br>
     "{{ info.data[0] }}"
     <p>- {{names[imageIndex]}}</p>
+  </br>
+    <button @click="upload">Upload</button>
+    <p> Your saved quotes! </p>
+    <input v-model="newItemQuote">
+  </br>
+  </br>
+  <div class="image" v-for="item in items">
+    <img v-bind:src="images[item.path]" />
+    <p>{{item.quote}}</p>
+    <p>- {{names[item.path]}}</p>
+    <button @click="deleteItem(item)">Delete</button>
+    <button @click="editItem(item)">Edit</button>
+  </div>
   </div>
   </h1>
   </center>
